@@ -1,6 +1,7 @@
 import './App.css'
 import {Link, Route, Routes} from "react-router-dom";
 import {HomePage} from "./components/HomePage.jsx"
+import {AnimalComponent} from "./components/AnimalComponent.jsx";
 import React, {useState} from "react";
 
 function App() {
@@ -49,7 +50,7 @@ function App() {
             </div>
             <Routes>
                 <Route path={"/encyclopedia/"} element={<HomePage/>}/>
-                
+                <Route path={"encyclopedia/animal/:name"} element={<AnimalComponent/>}/>
             </Routes>
         </div>
     )
