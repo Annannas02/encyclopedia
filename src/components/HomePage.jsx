@@ -5,7 +5,7 @@ import SearchComponent from "./SearchComponent.jsx";
 
 export const HomePage = () => {
     const {animals, isLoading} = useAnimals('https://freetestapi.com/api/v1/animals')
-    const [filteredAnimals, setFilteredAnimals] = useState( null)
+    const [filteredAnimals, setFilteredAnimals] = useState( localStorage.getItem('filer' || null))
     const [diet, setDiet] = useState(new Set())
     const [places, setPlaces] = useState(new Set());
 
@@ -44,6 +44,10 @@ export const HomePage = () => {
             }
         }
     }, [diet,places, animals, isLoading])
+    useEffect(() => {
+        localStorage.setItem('filter', JSON.stringify(filteredAnimals))
+
+    })
 
     return (
         <div className={"container"}>
