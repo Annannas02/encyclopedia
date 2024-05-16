@@ -1,18 +1,20 @@
+// AnimalComponent.jsx
 import React from 'react';
-import {useParams} from "react-router-dom";
-import {useAnimals} from "../api/useAnimals.js";
-import {Loader} from "./Loader.jsx";
+import { useParams } from "react-router-dom";
+import { useAnimals } from "../api/useAnimals.js";
+import { Loader } from "./Loader.jsx";
 
 export const AnimalComponent = () => {
-    const animalId = useParams()
-    const {animals, isLoading} = useAnimals(`https://freetestapi.com/api/v1/animals/${animalId.name}`)
+    const { name } = useParams();
+    const { animals, isLoading } = useAnimals(`http://localhost:8000/api/animals/${name}`);
+
     return (
-            <div className={"animal_container"}>
-                {isLoading ?
-                    <div className={"home_page"}>
-                        <Loader/>
-                    </div>
-                :
+        <div className={"animal_container"}>
+            {isLoading ? (
+                <div className={"home_page"}>
+                    <Loader />
+                </div>
+            ) : (
                 <div className={"animal_info"}>
                     <h2>{animals?.name}</h2>
                     <span>Species </span>
@@ -21,16 +23,16 @@ export const AnimalComponent = () => {
                     <p>{animals?.family}</p>
                     <span>Habitat </span>
                     <p>{animals?.habitat}</p>
-                    <span>Place of Found </span>
-                    <p>{animals?.place_of_found}</p>
+                    <span>Location </span>
+                    <p>{animals?.location}</p>
                     <span>Diet </span>
                     <p>{animals?.diet}</p>
                     <span>Weight </span>
-                    <p>~{animals?.weight_kg} kg</p>
+                    <p>~{animals?.weight} kg</p>
                     <span>Height </span>
-                    <p>~{animals?.height_cm} cm</p>
-                </div>}
-            </div>
+                    <p>~{animals?.height} cm</p>
+                </div>
+            )}
+        </div>
     );
 };
-
