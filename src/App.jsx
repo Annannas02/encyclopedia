@@ -16,9 +16,7 @@ function App() {
     useEffect(() => {
         const token = localStorage.getItem('accessToken');
         setIsAuthenticated(!!token);
-        if (token) {
-            navigate('/encyclopedia/');
-        } else {
+        if (!token) {
             navigate('/encyclopedia/login');
         }
     }, [navigate]);
@@ -66,14 +64,14 @@ function App() {
                 <Routes>
                     <Route path="/encyclopedia/login" element={<LoginPage />} />
                     <Route
-                        path="/encyclopedia/*"
+                        path="/encyclopedia/"
                         element={isAuthenticated ? <HomePage /> : <Navigate to="/encyclopedia/login" />}
                     />
                     <Route
                         path="/encyclopedia/animal/:name"
                         element={isAuthenticated ? <AnimalComponent /> : <Navigate to="/encyclopedia/login" />}
                     />
-                    <Route path="*" element={<Navigate to="/encyclopedia/login" />} />
+                    <Route path="*" element={<Navigate to="/encyclopedia/" />} />
                 </Routes>
             </main>
         </div>
